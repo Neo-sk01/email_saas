@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "generatedAt": "2025-06-12T23:38:18.054Z",
+    "tasksAnalyzed": 10,
+    "totalTasks": 10,
+    "analysisCount": 10,
+    "thresholdScore": 5,
+    "projectName": "Taskmaster",
+    "usedResearch": false
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 1,
+      "taskTitle": "Configure Fire Enrich Git Submodule",
+      "complexityScore": 4,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the 'Configure Fire Enrich Git Submodule' task into 5 subtasks, including git submodule setup, environment configuration, dependency installation, validation script creation, and documentation. For each subtask, provide a clear title, detailed description, acceptance criteria, and estimated time.",
+      "reasoning": "This task involves standard git operations and environment setup. The complexity is moderate due to potential conflicts with existing dependencies and the need for proper environment variable configuration. The task is well-defined with clear steps but requires careful execution to avoid integration issues."
+    },
+    {
+      "taskId": 2,
+      "taskTitle": "Create TypeScript Wrapper Services",
+      "complexityScore": 7,
+      "recommendedSubtasks": 8,
+      "expansionPrompt": "Divide the 'Create TypeScript Wrapper Services' task into 8 subtasks, including: 1) directory structure setup, 2) type definitions, 3-7) implementation of each wrapper service (company-profile, funding-history, tech-stack, web-scraper, and error handling), and 8) integration testing. For each subtask, include implementation details, acceptance criteria, and test cases.",
+      "reasoning": "This task requires creating multiple wrapper services with type-safe interfaces, error handling, and retry logic. The complexity is high because it involves understanding the underlying Fire Enrich API, designing proper TypeScript interfaces, and implementing robust error handling. Each wrapper service needs individual attention and testing."
+    },
+    {
+      "taskId": 3,
+      "taskTitle": "Extend Prisma Schema with Enrichment Models",
+      "complexityScore": 6,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Break down the 'Extend Prisma Schema with Enrichment Models' task into 6 subtasks: 1) Define EnrichmentJob model, 2) Define CompanyProfile model, 3) Extend EmailAddress model with relations, 4) Create EnrichmentCache model, 5) Create EnrichmentTemplate model, and 6) Create and test migration. For each subtask, include detailed schema definitions, relationship explanations, index recommendations, and migration testing steps.",
+      "reasoning": "This task involves database schema design with multiple related models. The complexity comes from ensuring proper relationships between models, designing appropriate indexes for performance, and ensuring backward compatibility with existing data. The migration process needs careful planning to avoid data loss or application issues."
+    },
+    {
+      "taskId": 4,
+      "taskTitle": "Create tRPC Enrichment Router",
+      "complexityScore": 7,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Divide the 'Create tRPC Enrichment Router' task into 7 subtasks, one for each tRPC procedure: 1) createEnrichmentJob, 2) getEnrichmentJobStatus, 3) cancelEnrichmentJob, 4) enrichCompanyProfile, 5) exportEnrichmentData, 6) importEmailList, and 7) integration with root router. For each procedure, detail the input validation, business logic, error handling, and test cases.",
+      "reasoning": "This task requires implementing multiple tRPC procedures with proper authentication, validation, and error handling. The complexity is high because it involves background job processing, state management, and integration with the database. Each procedure needs careful design to ensure security and proper error handling."
+    },
+    {
+      "taskId": 5,
+      "taskTitle": "Implement Enrichment Job Processing System",
+      "complexityScore": 8,
+      "recommendedSubtasks": 8,
+      "expansionPrompt": "Break down the 'Implement Enrichment Job Processing System' task into 8 subtasks: 1) Job processor class design, 2) Job queue management, 3) Domain processing logic, 4) Progress tracking implementation, 5) Job status management, 6) Error handling and recovery, 7) Cancellation functionality, and 8) Performance optimization. For each subtask, include detailed implementation guidance, edge cases to handle, and testing strategies.",
+      "reasoning": "This task involves creating a complex background job processing system with queue management, progress tracking, and error handling. The complexity is high due to the asynchronous nature of the processing, potential for race conditions, and need for resilience against failures. The system must handle cancellation requests and provide accurate progress updates."
+    },
+    {
+      "taskId": 6,
+      "taskTitle": "Enhance Email Generation with Enrichment Data",
+      "complexityScore": 6,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "Divide the 'Enhance Email Generation with Enrichment Data' task into 6 subtasks: 1) Update prompt generation system, 2) Modify email composition to fetch company data, 3) Implement UI toggle for enrichment, 4) Create enrichment data display component, 5) Implement caching for enrichment data, and 6) Test and optimize AI-generated emails with enrichment. For each subtask, provide implementation details, UI/UX considerations, and testing approaches.",
+      "reasoning": "This task requires modifying the existing email generation system to incorporate enrichment data. The complexity comes from integrating with the AI prompt system, fetching and displaying relevant company data, and ensuring the UI provides a seamless experience. The task involves both frontend and backend changes with potential performance implications."
+    },
+    {
+      "taskId": 7,
+      "taskTitle": "Create Enrichment UI Components",
+      "complexityScore": 7,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Break down the 'Create Enrichment UI Components' task into 7 subtasks: 1) CompanyProfile component, 2) EnrichmentToggle component, 3) JobStatus component with real-time updates, 4) BulkEnrichment component, 5) Component integration with email client, 6) Responsive design implementation, and 7) Accessibility compliance. For each component, detail the props interface, state management, UI design, and test cases.",
+      "reasoning": "This task involves creating multiple UI components with complex functionality like real-time updates and data visualization. The complexity is high due to the need for responsive design, accessibility compliance, and integration with existing components. Each component requires careful state management and proper error handling."
+    },
+    {
+      "taskId": 8,
+      "taskTitle": "Implement Bulk Enrichment Feature",
+      "complexityScore": 7,
+      "recommendedSubtasks": 7,
+      "expansionPrompt": "Divide the 'Implement Bulk Enrichment Feature' task into 7 subtasks: 1) Create bulk enrichment page layout, 2) Implement CSV file upload and parsing, 3) Develop email extraction logic, 4) Create job creation and monitoring UI, 5) Implement data export functionality, 6) Add navigation and user flow, and 7) Implement rate limiting and error handling. For each subtask, provide implementation details, edge cases to handle, and testing approaches.",
+      "reasoning": "This task requires creating a complete feature for bulk processing of email lists. The complexity comes from handling file uploads, parsing CSV data, managing long-running jobs, and providing export functionality. The feature must handle large datasets efficiently and provide clear feedback to users throughout the process."
+    },
+    {
+      "taskId": 9,
+      "taskTitle": "Implement Enrichment Data Caching",
+      "complexityScore": 5,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the 'Implement Enrichment Data Caching' task into 5 subtasks: 1) Cache service implementation, 2) Integration with wrapper services, 3) Cache invalidation strategy, 4) Cache cleanup job, and 5) Cache statistics and monitoring. For each subtask, provide detailed implementation guidance, performance considerations, and testing strategies.",
+      "reasoning": "This task involves creating a caching system to improve performance. The complexity is moderate because it requires understanding caching principles, implementing TTL-based expiration, and ensuring thread safety. The task is well-defined but requires careful implementation to avoid introducing bugs or performance issues."
+    },
+    {
+      "taskId": 10,
+      "taskTitle": "Integrate Enrichment with Email Composer",
+      "complexityScore": 8,
+      "recommendedSubtasks": 8,
+      "expansionPrompt": "Divide the 'Integrate Enrichment with Email Composer' task into 8 subtasks: 1) Modify email composer component, 2) Implement enrichment toggle UI, 3) Create company profile display, 4) Implement domain extraction and data fetching, 5) Update AI email generation endpoint, 6) Add visual indicators for enrichment status, 7) Implement data refresh functionality, and 8) Add user guidance and tooltips. For each subtask, provide implementation details, UI/UX considerations, and testing approaches.",
+      "reasoning": "This task requires deep integration between the enrichment system and the email composer. The complexity is high because it involves modifying a core component of the application, implementing real-time data fetching, and ensuring a seamless user experience. The task requires changes to both frontend and backend with potential for regression issues."
+    }
+  ]
+}
