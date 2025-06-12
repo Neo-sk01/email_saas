@@ -1,0 +1,3 @@
+[submodule "fire-enrich"]
+	path = fire-enrich
+	url = https://github.com/mendableai/fire-enrich.git

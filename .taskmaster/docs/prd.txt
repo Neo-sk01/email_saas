@@ -1,0 +1,192 @@
+<context>
+# Overview  
+An AI-powered email client with integrated chatbot functionality for crafting personalized outreach emails. The system will integrate the existing Fire Enrich codebase (via git submodule at project root) to add comprehensive data enrichment capabilities that transform basic email lists into enriched datasets with company profiles, funding history, technology stacks, and more. This integration provides users with an open-source alternative to expensive data enrichment platforms while maintaining unlimited local usage and leveraging the existing email client infrastructure.
+
+# Core Features  
+## Existing Email Client Features (Current)
+- AI-powered email composition with chatbot integration using tRPC and Next.js
+- PostgreSQL database with Prisma ORM for email management
+- User authentication via Clerk with account management
+- Email sync and threading functionality with Aurinko API
+- Rich text email editor with AI assistance
+- Email organization with inbox, sent, and draft management
+
+## Fire Enrich Integration Features (New)
+- **Git Submodule Integration**: Fire Enrich as root-level `fire-enrich/` submodule with wrapper services
+- **Email List Processing**: Transform basic email lists into enriched datasets using Fire Enrich's multi-agent architecture
+- **Company Profile Enrichment**: Extract comprehensive company information including size, industry, location, and business details
+- **Funding History Analysis**: Gather investment rounds, valuations, and investor information from multiple sources
+- **Technology Stack Detection**: Identify tools, frameworks, and technologies used by target companies
+- **Web Scraping Integration**: Leverage existing Firecrawl integration from Fire Enrich for data extraction
+- **AI Data Synthesis**: Use Fire Enrich's OpenAI integration for intelligent data processing and organization
+- **Sequential Multi-Agent Architecture**: Utilize Fire Enrich's proven modular system for reliable data enrichment
+- **Custom Prompt Integration**: Enhanced email generation using enriched company data for personalized outreach
+
+# User Experience  
+## User Personas
+- **Sales Professionals**: Need enriched prospect data for personalized outreach campaigns with higher conversion rates
+- **Marketing Teams**: Require comprehensive company insights for targeted campaigns and lead qualification
+- **Business Development**: Want detailed technology and funding information for partnership opportunities and strategic outreach
+
+## Key User Flows
+1. **Enhanced Email Composition Flow**: User inputs basic email requirements → System automatically enriches recipient data using Fire Enrich → AI chatbot generates highly personalized draft using enriched insights → User reviews and sends enhanced email
+2. **Bulk Data Enrichment Flow**: User uploads CSV email list → Fire Enrich processes and enriches data in background → User receives comprehensive dataset with company profiles → Export enriched data for external use
+3. **Integrated Workflow**: User enriches prospect data → Uses enriched insights to craft personalized emails via existing chatbot → Tracks engagement with enriched context
+
+## UI/UX Considerations
+- Seamless integration with existing email client interface without disrupting current workflows
+- Progress indicators for data enrichment processing with real-time status updates
+- Clear data visualization for enriched company profiles within email threads
+- Export capabilities for enriched datasets in multiple formats (CSV, JSON)
+- Integration with existing tRPC API patterns for consistent performance
+- Non-intrusive enrichment suggestions that enhance rather than complicate the email composition process
+</context>
+<PRD>
+# Technical Architecture  
+## System Components
+- **Frontend**: Existing Next.js application with current email client interface, enhanced with enrichment UI components
+- **Backend API**: Existing tRPC router structure with new `enrichment` router for Fire Enrich operations
+- **Database**: Current PostgreSQL with Prisma ORM, extended with enrichment data models for caching and job tracking
+- **Fire Enrich Integration**: Git submodule at project root `fire-enrich/` with TypeScript wrapper services in `src/lib/enrichment/`
+- **AI Integration**: Existing OpenAI integration enhanced with Fire Enrich's specialized agents and data synthesis capabilities
+- **Authentication**: Current Clerk authentication system extended to protect enrichment endpoints
+- **Custom Prompt Engine**: Enhanced background prompt system using enriched company data for contextual email generation
+
+## Data Models (Prisma Schema Extensions)
+- **EnrichmentJob**: Track processing status, progress, and results for email list enrichment operations
+- **CompanyProfile**: Store enriched company data including funding history, tech stack, team size, and business metrics
+- **EnrichmentData**: Link enriched data to existing EmailAddress records with relationship mapping
+- **EnrichmentTemplate**: Store custom enrichment configurations, prompts, and user preferences
+- **EnrichmentCache**: Cache enriched data to avoid redundant API calls and improve performance
+
+## APIs and Integrations
+- **Fire Enrich Wrapper Services**: TypeScript interfaces to Fire Enrich functionality in `src/lib/enrichment/` with error handling and type safety
+- **New tRPC Routes**: `enrichment` router with procedures for job management, data enrichment, and export operations
+- **Existing OpenAI Integration**: Enhanced with enrichment-aware prompt generation using Fire Enrich's specialized agents
+- **Existing Database**: Extended with enrichment-specific tables while maintaining current email functionality
+- **Fire Enrich Dependencies**: Firecrawl for web scraping, OpenAI for AI processing, and specialized agents for data synthesis
+
+## Infrastructure Requirements
+- **Git Submodule Management**: Fire Enrich submodule at project root with proper initialization and update procedures
+- **Fire Enrich Dependencies**: Install and configure Fire Enrich npm dependencies without conflicts
+- **Environment Variables**: Extend existing .env with Fire Enrich API keys (FIRECRAWL_API_KEY, additional OpenAI keys)
+- **Database Migrations**: Prisma migrations for new enrichment tables with proper indexing and relationships
+- **Local Processing**: Leverage Fire Enrich's local processing capabilities for cost-effective enrichment operations
+
+# Development Roadmap  
+## Phase 1: Fire Enrich Integration Foundation
+- Configure Fire Enrich environment variables and install required dependencies
+- Create TypeScript wrapper services in `src/lib/enrichment/` that interface with Fire Enrich services
+- Extend Prisma schema with enrichment data models (EnrichmentJob, CompanyProfile, EnrichmentData, etc.)
+- Create and run database migrations for new enrichment tables
+- Set up Fire Enrich service imports and initialization with proper error handling
+- Test basic Fire Enrich functionality through wrapper services
+
+## Phase 2: tRPC API Integration
+- Create new `enrichment` tRPC router with authentication middleware
+- Implement enrichment job management procedures (create, status, cancel operations)
+- Add company profile enrichment endpoints using Fire Enrich's specialized agents
+- Create data export and import procedures for CSV and JSON formats
+- Integrate enrichment operations with existing Clerk authentication system
+- Add comprehensive error handling and validation for enrichment operations
+
+## Phase 3: Enhanced Email Generation
+- Extend existing email generation system to incorporate enrichment data
+- Enhance custom prompt system to use company insights from Fire Enrich for contextual email drafting
+- Modify existing AI compose functionality to include enriched context automatically
+- Add enrichment-aware email templates that leverage company-specific data
+- Integrate enriched data into existing chatbot responses for more personalized suggestions
+- Implement real-time enrichment during email composition for immediate insights
+
+## Phase 4: User Interface Integration
+- Add enrichment controls to existing email composer with intuitive toggle options
+- Create enrichment job status indicators with progress bars and real-time updates
+- Build company profile display components using enriched data within email threads
+- Add enrichment data visualization to email threads showing company insights
+- Implement enrichment settings in user preferences for customization options
+- Create bulk enrichment interface for processing email lists with batch operations
+
+## Phase 5: Advanced Features & Optimization
+- Add batch enrichment processing using Fire Enrich's multi-agent architecture for large datasets
+- Implement intelligent enrichment data caching strategies to reduce API costs and improve performance
+- Create advanced filtering and search capabilities based on enriched company data
+- Add enrichment analytics and reporting dashboard for tracking usage and insights
+- Optimize Fire Enrich integration performance with connection pooling and request batching
+- Implement enrichment data export automation and scheduling features
+
+# Logical Dependency Chain
+## Foundation First (Phase 1)
+- Environment configuration and dependency installation must be completed before any Fire Enrich functionality can be used
+- Database schema extensions are required before storing any enrichment data or job tracking information
+- Wrapper services provide clean, type-safe interface to Fire Enrich functionality and must be established before API integration
+- Fire Enrich service initialization and testing ensures reliable foundation before building dependent features
+
+## API Integration (Phase 2)
+- tRPC enrichment router depends on completed wrapper services and database schema extensions
+- Enrichment procedures require functional database models for job tracking and data storage
+- Authentication integration leverages existing Clerk system to protect enrichment endpoints
+- Job management system requires database models and wrapper services to be fully operational
+
+## Enhanced Generation (Phase 3)
+- Email generation enhancements require functional enrichment API endpoints and data availability
+- Custom prompt system modifications need access to enriched company data through established APIs
+- AI compose functionality depends on enrichment data being reliably available and properly formatted
+- Template system builds upon existing email functionality while incorporating enrichment capabilities
+
+## UI Integration (Phase 4)
+- UI components require functional enrichment API endpoints and reliable data flow
+- Status indicators need operational job management system with real-time updates
+- Data visualization components depend on enrichment data models and consistent data structure
+- Settings integration uses existing user preference patterns and database relationships
+
+## Advanced Features (Phase 5)
+- Batch processing requires stable core enrichment system with proven reliability and performance
+- Caching strategies need performance baseline measurements and usage pattern analysis
+- Advanced filtering depends on comprehensive enriched data availability and proper indexing
+- Analytics and reporting require complete data collection pipeline and historical data accumulation
+
+# Risks and Mitigations  
+## Technical Challenges
+- **Fire Enrich Dependencies**: Potential conflicts between Fire Enrich dependencies and existing project packages. Mitigation: Careful dependency analysis, version pinning, and isolated testing environment setup.
+- **Database Schema Changes**: Risk of breaking existing functionality during schema extensions. Mitigation: Use Prisma migrations with rollback capabilities, comprehensive testing, and staged deployment.
+- **API Integration Complexity**: Fire Enrich integration may introduce performance bottlenecks or reliability issues. Mitigation: Create comprehensive wrapper services with circuit breakers, retry logic, and fallback mechanisms.
+- **Environment Configuration**: Complex API key management and service configuration. Mitigation: Clear documentation, environment validation scripts, and secure key management practices.
+
+## Integration Scope Management
+- **Focus on Core Integration**: Risk of scope creep by trying to implement all Fire Enrich features immediately. Mitigation: Prioritize basic enrichment functionality, implement incrementally, and validate each phase before proceeding.
+- **Incremental Development**: Risk of integration breaking existing functionality. Mitigation: Build wrapper services incrementally with comprehensive testing, feature flags, and gradual rollout.
+- **Existing Code Preservation**: Risk of Fire Enrich integration disrupting current email client functionality. Mitigation: Maintain strict separation of concerns, comprehensive regression testing, and backward compatibility.
+
+## Resource Constraints
+- **Fire Enrich Learning Curve**: Team may need significant time to understand Fire Enrich architecture and integration patterns. Mitigation: Allocate dedicated learning time, create internal documentation, and start with simple integration patterns.
+- **Dependency Management**: Risk of version conflicts and maintenance overhead. Mitigation: Monitor dependency health, establish update procedures, and maintain compatibility matrices.
+- **Performance Impact**: Enrichment operations may slow down existing email functionality. Mitigation: Implement asynchronous processing, performance monitoring, and optimization strategies from the start.
+
+# Appendix  
+## Technical Specifications
+- **Current Stack**: Next.js 14+, tRPC, PostgreSQL, Prisma, Clerk authentication, TypeScript, Tailwind CSS
+- **Fire Enrich Stack**: Node.js, OpenAI GPT models, Firecrawl web scraping, multi-agent architecture, TypeScript
+- **Integration Pattern**: Git submodule with TypeScript wrapper services and tRPC API integration
+- **Database**: Extend existing Prisma schema with enrichment models while maintaining current email functionality
+
+## Fire Enrich Integration Points
+- **Submodule Location**: `fire-enrich/` at project root with proper git submodule configuration
+- **Wrapper Services**: `src/lib/enrichment/` directory containing TypeScript interfaces to Fire Enrich functionality
+- **tRPC Router**: `src/server/api/routers/enrichment.ts` for enrichment API endpoints
+- **Database Models**: Extend `prisma/schema.prisma` with enrichment tables and relationships
+- **Environment Configuration**: Extend existing `.env` with Fire Enrich API keys and configuration
+- **Key Fire Enrich Services**: Integration with `fire-enrich/lib/services/` (firecrawl.ts, openai.ts, specialized-agents.ts)
+
+## Migration Strategy
+- **Phase 1**: Establish Fire Enrich integration foundation without any UI changes to existing functionality
+- **Phase 2**: Add enrichment API endpoints while maintaining complete backward compatibility with existing features
+- **Phase 3**: Enhance existing email generation features with enrichment capabilities as optional enhancements
+- **Phase 4**: Add new UI components for enrichment features that complement rather than replace existing interface
+- **Phase 5**: Optimize and add advanced enrichment features based on user feedback and usage patterns
+
+## Research Findings
+- **Fire Enrich Architecture**: Proven multi-agent approach with sequential processing ensures data quality and consistency
+- **Local Deployment Benefits**: Self-hosted solution reduces operational costs and provides unlimited usage without external API limitations
+- **Modular Design Advantages**: Fire Enrich's modular architecture enables custom data extraction tasks and easy extensibility
+- **Integration Compatibility**: Fire Enrich's TypeScript codebase and Node.js foundation align well with existing email client technology stack
+</PRD>
