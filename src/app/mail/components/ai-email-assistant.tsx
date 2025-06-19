@@ -30,36 +30,36 @@ export function AIEmailAssistant() {
     }
 
     setIsGenerating(true)
+    setGeneratedEmail("") // Clear previous email while generating
     
     try {
-      // TODO: Replace with actual API call to Perplexity
-      // This is a mock implementation for UI testing
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      // Call our API route which interfaces with Perplexity
+      const response = await fetch('/api/generate-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          companyName,
+          linkedInDescription,
+          blogPosts
+        }),
+      })
       
-      const mockEmail = `Subject: Partnering with ${companyName} for LGBTIQ+ Market Engagement
-
-Dear ${companyName} Team,
-
-I'm reaching out from MambaOnline, South Africa's leading LGBTIQ+ digital platform serving 40,000+ monthly visitors across Southern Africa. We help forward-thinking brands like ${companyName} connect with the R250B+ LGBTIQ+ market in South Africa.
-
-${linkedInDescription ? `I noticed your recent work on ${linkedInDescription.split('.').slice(0, 2).join('.')}...` : ''}
-
-${blogPosts ? `Your recent content about "${blogPosts.split('.').slice(0, 1).join('.')}" aligns well with our community's interests.` : ''}
-
-Would you be open to a quick call next week to explore potential partnership opportunities?
-
-Best regards,
-[Your Name]
-MambaOnline`
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to generate email')
+      }
       
-      setGeneratedEmail(mockEmail)
+      const data = await response.json()
+      setGeneratedEmail(data.email)
       
       // Add to history
       const newEntry = {
         companyName,
         linkedInDescription,
         blogPosts,
-        generatedEmail: mockEmail,
+        generatedEmail: data.email,
         timestamp: Date.now()
       }
       setHistory([newEntry, ...history.slice(0, 9)]) // Keep last 10 items

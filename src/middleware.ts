@@ -9,6 +9,7 @@ const isPublicRoute = createRouteMatcher([
   '/api/aurinko/webhook(.*)',
   '/api/stripe(.*)',
   '/api/chat(.*)', // Added temporarily for testing
+  '/api/generate-email(.*)', // Added for AI Email Assistant
   '/privacy',
   '/terms-of-service'
 ])
