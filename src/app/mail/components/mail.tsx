@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useSearchParams } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 import {
@@ -24,6 +25,8 @@ import SideBar from "./sidebar"
 import SearchBar, { isSearchingAtom } from "./search-bar"
 import { useAtom } from "jotai"
 import AskAI from "./ask-ai"
+import { AIEmailAssistant } from "./ai-email-assistant"
+import { Sparkles } from "lucide-react"
 
 interface MailProps {
   defaultLayout: number[] | undefined
@@ -36,7 +39,11 @@ export function Mail({
   defaultCollapsed = false,
   navCollapsedSize,
 }: MailProps) {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get('tab')
+  
   const [done, setDone] = useLocalStorage('normalhuman-done', false)
+  const [activeTab, setActiveTab] = React.useState(tabParam === 'ai-email' ? 'ai-email' : (done ? 'done' : 'inbox'))
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed)
 
 
@@ -92,13 +99,20 @@ export function Mail({
         </ResizablePanel>
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-          <Tabs defaultValue="inbox" value={done ? 'done' : 'inbox'} onValueChange={tab => {
-            if (tab === 'done') {
-              setDone(true)
-            } else {
-              setDone(false)
-            }
-          }}>
+          <Tabs 
+            defaultValue="inbox" 
+            value={activeTab}
+            onValueChange={tab => {
+              setActiveTab(tab)
+              if (tab === 'done') {
+                setDone(true)
+              } else if (tab === 'ai-email') {
+                // Don't change the done state for AI Email tab
+              } else {
+                setDone(false)
+              }
+            }}
+          >
             <div className="flex items-center px-4 py-2">
               <h1 className="text-xl font-bold">Inbox</h1>
               <TabsList className="ml-auto">
@@ -114,6 +128,13 @@ export function Mail({
                 >
                   Done
                 </TabsTrigger>
+                <TabsTrigger
+                  value="ai-email"
+                  className="text-zinc-600 dark:text-zinc-200"
+                >
+                  <Sparkles className="mr-2 h-3.5 w-3.5" />
+                  AI Email Assistant
+                </TabsTrigger>
               </TabsList>
             </div>
             <Separator />
@@ -123,6 +144,9 @@ export function Mail({
             </TabsContent>
             <TabsContent value="done" className="m-0">
               <ThreadList />
+            </TabsContent>
+            <TabsContent value="ai-email" className="m-0 h-full">
+              <AIEmailAssistant />
             </TabsContent>
           </Tabs>
         </ResizablePanel>

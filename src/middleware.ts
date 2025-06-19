@@ -8,6 +8,7 @@ const isPublicRoute = createRouteMatcher([
   '/api/initial-sync(.*)',
   '/api/aurinko/webhook(.*)',
   '/api/stripe(.*)',
+  '/api/chat(.*)', // Added temporarily for testing
   '/privacy',
   '/terms-of-service'
 ])
