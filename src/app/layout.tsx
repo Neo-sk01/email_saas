@@ -8,10 +8,11 @@ import { type Metadata } from "next";
 import { TRPCReactProvider } from "@/trpc/react";
 import { ThemeProvider } from "@/components/theme-provicer";
 import { Toaster } from "sonner";
+import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: "Normal Human",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  title: "Traffic AI Email",
+  icons: [{ rel: "icon", url: "/6533aa34c693127e8f234ccf_Traffic.svg" }],
 };
 
 export default function RootLayout({
@@ -21,6 +22,8 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
+          <Script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" strategy="beforeInteractive" />
+          <Script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js" strategy="beforeInteractive" />
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
             <TRPCReactProvider>
               <Kbar>
