@@ -138,13 +138,62 @@ const LandingPage = () => {
       </main>
       {/* Placeholder for Features, How It Works, CTA, and Footer sections from previous version */}
       {/* These will be integrated in subsequent steps */}
-      <footer className="relative z-10 px-6 py-12 mt-16 border-t border-gray-700">
-        <div className="max-w-7xl mx-auto text-center text-gray-400 text-sm">
-          <p>&copy; {new Date().getFullYear()} Traffic AI Email. All rights reserved.</p>
-          <div className="mt-4 space-x-4">
-            <Link href="/terms-of-service" className="hover:text-white">Terms of Service</Link>
-            <Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
+      <footer className="relative z-10 px-6 py-12 mt-16 border-t border-gray-700 bg-gradient-to-b from-transparent to-gray-900">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-400 text-sm">
+          {/* Column 1: Logo and Copyright */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <Image
+              src="/6533aa34c693127e8f234ccf_Traffic.svg"
+              alt="Traffic AI Email Logo"
+              width={100}
+              height={100}
+              className="mb-4"
+            />
+            <p>&copy; {new Date().getFullYear()} Traffic AI Email. All rights reserved.</p>
+            <div className="mt-2 space-x-4">
+              <Link href="/terms-of-service" className="hover:text-white">Terms of Service</Link>
+              <Link href="/privacy-policy" className="hover:text-white">Privacy Policy</Link>
+            </div>
           </div>
+
+          {/* Column 2: Call to Action & Social Media */}
+          <div className="flex flex-col items-center md:items-center text-center">
+            <h3 className="text-lg font-semibold text-white mb-4">Ready to Transform Your Outreach?</h3>
+            <Link href="/sign-up" className="px-6 py-3 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 mb-6 shadow-lg">
+              Get Started Free
+            </Link>
+            <div className="flex space-x-6">
+              {/* Placeholder Social Icons - replace with actual SVG/components later if desired */}
+              <a href="#" className="text-gray-400 hover:text-white transition-colors"><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" /></svg></a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors"><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.002 3.797.048 1.05.056 1.749.217 2.428.465.667.236 1.144.486 1.596.939.453.452.703.929.939 1.596.248.679.409 1.378.465 2.428.047 1.013.048 1.372.048 3.797 0 2.43-.002 2.784-.048 3.797-.056 1.05-.217 1.749-.465 2.428-.236.667-.486 1.144-.939 1.596-.453.452-.929.703-1.596.939-.679.248-1.378.409-2.428.465-1.013.047-1.372.048-3.797.048s-2.784-.002-3.797-.048c-1.05-.056-1.749-.217-2.428-.465-.667-.236-1.144-.486-1.596-.939-.453-.452-.703-.929-.939-1.596-.248-.679-.409-1.378-.465-2.428-.047-1.013-.048-1.372-.048-3.797s.002-2.784.048-3.797c.056-1.05.217-1.749.465-2.428.236-.667.486-1.144.939-1.596.452-.453.929-.703 1.596-.939.679-.248 1.378-.409 2.428-.465C9.526 2.002 9.88 2 12.315 2zm0 2.166c-2.312 0-2.627.01-3.732.068-.973.045-1.502.174-1.859.309-.356.133-.66.298-.93.568-.27.27-.432.574-.568.93-.135.357-.264.886-.309 1.859-.058 1.105-.068 1.42-.068 3.732s.01 2.627.068 3.732c.045.973.174 1.502.309 1.859.133.356.298.66.568.93.27.27.574.432.93.568.357.135.886.264 1.859.309 1.105.058 1.42.068 3.732.068s2.627-.01 3.732-.068c-.973-.045-1.502-.174-1.859-.309-.356-.133-.66-.298-.93-.568-.27-.27-.432-.574-.568-.93-.135-.357-.264-.886-.309-1.859-.058-1.105-.068-1.42-.068-3.732s-.01-2.627-.068-3.732c-.045-.973-.174-1.502-.309-1.859-.133-.356-.298-.66-.568-.93-.27-.27-.574-.432-.93-.568-.357-.135-.886-.264-1.859-.309-1.105-.058-1.42-.068-3.732-.068zm0 1.802a6.83 6.83 0 100 13.66 6.83 6.83 0 000-13.66zm0 4.078a2.75 2.75 0 110 5.5 2.75 2.75 0 010-5.5zm5.83-.249a1.006 1.006 0 00-1.005-1.005h-.002a1.006 1.006 0 101.005 1.005h.002z" clipRule="evenodd" /></svg></a>
+              <a href="#" className="text-gray-400 hover:text-white transition-colors"><svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184c-1.04-.24-2.113-.48-3.19-.732C15.0 2.91 13.5 2.5 12 2.5c-1.5 0-3 .41-4.425.952-1.076.252-2.15.492-3.19.732C3.5 3.9 2 5.4 2 7.5v9c0 2.1 1.5 3.6 3.385 3.816c1.04.24 2.113.48 3.19.732C9.0 21.09 10.5 21.5 12 21.5c1.5 0 3-.41 4.425-.952c1.076-.252 2.15-.492 3.19-.732C20.5 20.1 22 18.6 22 16.5v-9c0-2.1-1.5-3.6-3.385-3.816Zm-10.36 8.755l-3.84 2.17c-.31.17-.67.17-.98 0-.31-.17-.5-.5-.5-.86v-4.34c0-.36.19-.69.5-.86.31-.17.67-.17.98 0l3.84 2.17c.31.17.5.5.5.86s-.19.69-.5.86Zm7.52-2.17c.31-.17.67-.17.98 0l3.84 2.17c.31.17.5.5.5.86s-.19.69-.5.86l-3.84 2.17c-.31.17-.67.17-.98 0-.31-.17-.5-.5-.5-.86v-4.34c0-.36.19-.69.5-.86Z" clipRule="evenodd" /></svg></a>
+            </div>
+          </div>
+
+          {/* Column 3: Newsletter Signup */}
+          <div className="flex flex-col items-center md:items-end text-center md:text-right">
+            <h3 className="text-lg font-semibold text-white mb-4">Stay Updated</h3>
+            <p className="text-gray-500 mb-4">Join our newsletter for the latest news and updates.</p>
+            <form className="w-full max-w-sm">
+              <div className="flex items-center border border-gray-700 rounded-lg overflow-hidden">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  aria-label="Your email address"
+                  className="flex-grow px-4 py-2 bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-600"
+                />
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="mt-8 text-center text-gray-600 text-xs">
+          <p>Built with ❤️ by Traffic AI Email Team</p>
         </div>
       </footer>
     </div>
