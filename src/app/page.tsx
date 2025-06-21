@@ -97,8 +97,8 @@ const LandingPage = () => {
                 <Link href="/sign-up" className="px-6 py-3 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors">
                   Start Free Trial
                 </Link>
-                <Link href="/demo" className="px-6 py-3 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors">
-                  See Demo
+                <Link href="/mail" className="px-6 py-3 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-700 transition-colors">
+                  Go to Email Client
                 </Link>
               </div>
               <div className="flex items-center space-x-6">

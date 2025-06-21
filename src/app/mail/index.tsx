@@ -11,6 +11,7 @@ export default function MailPage() {
 
   return (
     <>
+      <div className="text-white text-2xl p-4">Hello Mail!</div>
       <div className="md:hidden">
         <img
           src="/examples/mail-dark.png"
