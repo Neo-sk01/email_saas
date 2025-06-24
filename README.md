@@ -74,4 +74,7 @@ Follow the steps below to install and setup the project:
 
     Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+CodeRabbit : ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/Neo-sk01/email_saas?utm_source=oss&utm_medium=github&utm_campaign=Neo-sk01%2Femail_saas&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
+
+
 
