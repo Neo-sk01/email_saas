@@ -1,7 +1,7 @@
 import { productAgent } from '../../../fire-enrich/lib/services/specialized-agents';
+import { handleEnrichmentError } from './errorHandler';
 import {
   TechStack,
-  EnrichmentError,
   EnrichmentResult,
 } from './types';
 
@@ -21,10 +21,6 @@ export async function enrichTechStack(
 
     return { success: true, data: techStack };
   } catch (error) {
-    const enrichmentError = new EnrichmentError(
-      'Failed to enrich tech stack',
-      { cause: error instanceof Error ? error : new Error(String(error)) }
-    );
-    return { success: false, error: enrichmentError };
+    return handleEnrichmentError(error, 'Failed to enrich tech stack');
   }
 }

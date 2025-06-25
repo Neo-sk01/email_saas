@@ -9,9 +9,11 @@ export interface CompanyProfile {
   name: string;
   domain: string;
   description: string;
+  industry: string;
+  size: string;
+  location: string;
   linkedin: string;
   twitter: string;
-  location: string;
   // Add other relevant fields
 }
 

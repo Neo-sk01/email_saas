@@ -1,7 +1,7 @@
 import { companyProfileAgent } from '../../../fire-enrich/lib/services/specialized-agents';
+import { handleEnrichmentError } from './errorHandler';
 import {
   CompanyNewsArticle,
-  EnrichmentError,
   EnrichmentResult,
 } from './types';
 
@@ -23,10 +23,6 @@ export async function enrichCompanyNews(
 
     return { success: true, data: articles };
   } catch (error) {
-    const enrichmentError = new EnrichmentError(
-      'Failed to enrich company news',
-      { cause: error instanceof Error ? error : new Error(String(error)) }
-    );
-    return { success: false, error: enrichmentError };
+    return handleEnrichmentError(error, 'Failed to enrich company news');
   }
 }

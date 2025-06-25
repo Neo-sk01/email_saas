@@ -165,6 +165,9 @@ model EmailAddress {
     accountId String
     account   Account @relation(fields: [accountId], references: [id])
 
+    companyProfile CompanyProfile? @relation(fields: [companyProfileId], references: [id])
+    companyProfileId String?
+
     @@unique([accountId, address])
 }
 
@@ -194,4 +197,51 @@ enum MeetingMessageMethod {
     cancel
     counter
     other
+}
+
+model EnrichmentJob {
+  id          String      @id @default(cuid())
+  status      String      @default("pending") // pending, processing, completed, failed
+  progress    Float       @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  userId      String
+  results     Json?       // Store job results
+  error       String?
+  companyProfiles CompanyProfile[]
+}
+
+model CompanyProfile {
+  id          String      @id @default(cuid())
+  domain      String      @unique
+  name        String?
+  description String?
+  industry    String?
+  size        String?
+  location    String?
+  fundingData Json?
+  techStack   Json?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  job         EnrichmentJob? @relation(fields: [jobId], references: [id])
+  jobId       String?
+  emailAddresses EmailAddress[]
+}
+
+model EnrichmentCache {
+  id          String      @id @default(cuid())
+  key         String      @unique
+  data        Json
+  expiresAt   DateTime
+  createdAt   DateTime    @default(now())
+}
+
+model EnrichmentTemplate {
+  id          String      @id @default(cuid())
+  name        String
+  description String?
+  config      Json
+  userId      String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }

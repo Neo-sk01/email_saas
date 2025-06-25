@@ -1,4 +1,5 @@
 import FirecrawlApp from '@mendable/firecrawl-js';
+import { handleEnrichmentError } from './errorHandler';
 import {
   WebScrapeResult,
   EnrichmentError,
@@ -24,28 +25,29 @@ export async function enrichWithWebScrape(
   }
 
   try {
-    const result = await firecrawl.scrape(url);
+    const response = await firecrawl.crawl(url, {
+      limit: 1,
+      scrapeOptions: { formats: ['markdown'] }
+    });
 
-    if (result.success) {
+    if (response.success && response.data && response.data.length > 0) {
+      const scrapedData = response.data[0];
       return {
         success: true,
         data: {
-          url,
-          content: result.data.content,
-          metadata: result.data.metadata,
+          url: scrapedData.url || url,
+          content: scrapedData.markdown || '',
+          metadata: scrapedData.metadata || {},
         },
       };
     } else {
-      return {
-        success: false,
-        error: new EnrichmentError(`Failed to scrape URL: ${result.error}`),
-      };
+      const errorMessage = response.error || 'Failed to scrape URL for an unknown reason.';
+      return handleEnrichmentError(new Error(errorMessage), 'Failed to scrape URL');
     }
   } catch (error) {
-    const enrichmentError = new EnrichmentError(
-      'An unexpected error occurred during web scraping',
-      { cause: error instanceof Error ? error : new Error(String(error)) }
+    return handleEnrichmentError(
+      error,
+      'An unexpected error occurred during web scraping'
     );
-    return { success: false, error: enrichmentError };
   }
 }
